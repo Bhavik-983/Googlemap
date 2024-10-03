@@ -15,7 +15,7 @@ const LocationSchema = await new Schema(
         longiTude: {
           type: String,
         },
-        date: {
+        created_at: {
           type: Date,
         },
       },

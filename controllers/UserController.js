@@ -63,7 +63,10 @@ export const userLogin = async (req, res) => {
 
 export const userList = async (req, res) => {
   try {
-    const users = await UserModel.find({});
+    const users = await UserModel.find(
+      {},
+      { password: 0, accessTokenId: 0, refreshTokenId: 0 }
+    );
     return sendSuccess(res, users);
   } catch (e) {
     return sendBadRequest(res, errorHelper(res, "USER_LIST"));

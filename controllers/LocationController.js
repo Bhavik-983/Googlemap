@@ -1,5 +1,6 @@
 import { errorHelper } from "../hepler/errorHelper.js";
 import { LocationModel } from "../models/LocationModels.js";
+import { sendDataToAgent } from "../sockets/index.js";
 import message from "../utilities/messages/message.js";
 import { sendBadRequest, sendSuccess } from "../utilities/response/index.js";
 
@@ -9,6 +10,11 @@ export const addLocation = async (req, res) => {
     if (location) {
       location.location = [...location.location, ...req.body.location];
       await location.save();
+      await sendDataToAgent(
+        "USER_LOCATION",
+        "location_data",
+        req.body.location
+      );
       return sendSuccess(res, message.locationAddSuccessfully);
     }
     const newLocation = await new LocationModel({
@@ -16,7 +22,7 @@ export const addLocation = async (req, res) => {
       location: req.body.location,
     });
     await newLocation.save();
-
+    await sendDataToAgent("USER_LOCATION", "location_data", req.body.location);
     return sendSuccess(res, message.locationAddSuccessfully);
   } catch (e) {
     return sendBadRequest(res, errorHelper(e, "ADD_LOCATION"));

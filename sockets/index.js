@@ -21,7 +21,6 @@ export const setSocket = async (socketAsServer) => {
       }).select({
         _id: 1,
       });
-      console.log(userDetails);
       onlineUsers.set(userDetails.id, socket.id);
       onlineUsersSocket.set(socket.id, userDetails.id);
       // When a client joins the 'fastParity' room
@@ -33,6 +32,17 @@ export const setSocket = async (socketAsServer) => {
       socket.on("leaveRoom", (room) => {
         socket.leave(room);
         console.log(`User ${socket.id} left room: ${room}`);
+      });
+      socket.on("location_data", (data) => {});
+      socket.on("error_in_add_location", (data) => {});
+
+      socket.on("add_location_data", async (data) => {
+        try {
+        } catch (e) {
+          socketAsServer
+            .to(socket.id)
+            .emit("error_in_add_location", errorHelper(e, "ADD_LOCATION"));
+        }
       });
     });
   } catch (e) {
