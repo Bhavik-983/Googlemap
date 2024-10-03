@@ -1,0 +1,20 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/home/ankit/Downloads/GoogleMap/logs/.01ff268acb51103933c7c749fccea9f9ca8ff3e4-audit.json",
+    "files": [
+        {
+            "date": 1727858285588,
+            "name": "/home/ankit/Downloads/GoogleMap/logs/app-2024-10-02.log",
+            "hash": "bca654a5ad377c923f83d0d2d030ad3018748b61efaf1d1b814a1e11e7cf547e"
+        },
+        {
+            "date": 1727929237404,
+            "name": "/home/ankit/Downloads/GoogleMap/logs/app-2024-10-03.log",
+            "hash": "e92d9932481f3c9963a7d23d368150533d10fc6d8c4b3412cbb27e2ff2d0b1d0"
+        }
+    ],
+    "hashType": "sha256"
+}
