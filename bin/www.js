@@ -7,7 +7,6 @@
 import app from "../app.js";
 import debugMessage from "debug";
 import http from "http";
-// import { instrument } from "@socket.io/admin-ui";
 import { shutDown } from "../utilities/serverUtils/shutDown.js";
 import { Server } from "socket.io";
 import { setIoObject } from "../sockets/index.js";

@@ -10,19 +10,21 @@ export const addLocation = async (req, res) => {
     if (location) {
       location.location = [...location.location, ...req.body.location];
       await location.save();
-      await sendDataToAgent(
-        "USER_LOCATION",
-        "location_data",
-        req.body.location
-      );
+      const data = {
+        userId: location.userId,
+        location: req.body.location,
+      };
+      console.log("old", data, "old");
+      await sendDataToAgent("USER_LOCATION", "location_data", data);
       return sendSuccess(res, message.locationAddSuccessfully);
     }
     const newLocation = await new LocationModel({
       userId: req.user._id,
       location: req.body.location,
     });
+    console.log("new", newLocation, "new");
     await newLocation.save();
-    await sendDataToAgent("USER_LOCATION", "location_data", req.body.location);
+    await sendDataToAgent("USER_LOCATION", "location_data", newLocation);
     return sendSuccess(res, message.locationAddSuccessfully);
   } catch (e) {
     return sendBadRequest(res, errorHelper(e, "ADD_LOCATION"));
